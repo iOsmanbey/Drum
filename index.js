@@ -2,12 +2,14 @@ var numberOfDrumButtons = document.querySelectorAll(".drum").length;
 for (var i = 0; i < numberOfDrumButtons; i++) {
     document.querySelectorAll(".drum")[i].addEventListener("click", function () {
         var buttonInnerHTML = this.innerHTML;
-        makeSound(buttonInnerHTML)
-    })
+        makeSound(buttonInnerHTML);
+        buttonAnimation(buttonInnerHTML);
+    });
 
     //Detecting keyBoard
     document.addEventListener("keydown", function (event) {
         makeSound(event.key);
+        buttonAnimation(event.key);
     });
 
 };
@@ -52,4 +54,12 @@ function makeSound(key) {
             break;
 
     }
+};
+
+function buttonAnimation(currenKey) {
+    var activeButton = document.querySelector("." + currenKey);
+    activeButton.classList.add("pressed");
+    setTimeout(function () {
+        activeButton.classList.remove("pressed");
+    }, 100);
 };
